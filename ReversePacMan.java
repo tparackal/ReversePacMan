@@ -1,6 +1,5 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -12,8 +11,8 @@ import javafx.scene.paint.Color;
 public class ReversePacMan extends Application
 {
 
-	final static int WIDTH = 840; // pixel width
-	final static int HEIGHT = 930; // pixel height
+//	final static int WIDTH = 840; // pixel width
+//	final static int HEIGHT = 930; // pixel height
 	
 	public static void main(String[] args) 
 	{
@@ -29,7 +28,7 @@ public class ReversePacMan extends Application
         Scene theScene = new Scene( root );
         theStage.setScene( theScene );
         
-        Canvas canvas = new Canvas( WIDTH, HEIGHT ); // 600 pixels wide, 500 pixels tall
+        Canvas canvas = new Canvas( Maze.WIDTH, Maze.HEIGHT ); // 840 pixels wide, 930 pixels tall
         root.getChildren().add( canvas );
         
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -40,7 +39,7 @@ public class ReversePacMan extends Application
     
     void render(GraphicsContext gc) throws FileNotFoundException, IOException
     {
-    	Canvas canvas = new Canvas( 600, 500 ); // 600 pixels wide, 500 pixels tall
+//    	Canvas canvas = new Canvas( 600, 500 ); // 600 pixels wide, 500 pixels tall
  		Maze maze = new Maze("level1.txt");
  		maze.initMaze();
  		maze.loadmaze(gc);

@@ -6,18 +6,25 @@ import javafx.scene.paint.Color;
 
 public class Maze 
 {
+/*
+ * NOTE: If map is too big for the screen,
+ * 
+ * 		change CELLSIZE from 30 to 20
+ * 		change WIDTH from 840 to 560
+ * 		change HEIGHT from 930 to 620
+ */
 	final static int xtiles = 28; // 28 tiles wide
 	final static int ytiles = 31; // 31 tiles high
-	final static int WIDTH = 840; // pixel width
-	final static int HEIGHT = 930; // pixel height
-	final static int CELLSIZE = 30; // cell side length (square)
+	public final static int WIDTH = 840; // pixel width 
+	public final static int HEIGHT = 930; // pixel height 
+	final static int CELLSIZE = 30; // cell side length (square) 
 	
 	final static int EMPTY = 0;
 	final static int WALL = 1;
 	final static int PELLET = 2;
 	
 	String filename;
-	public int grid [][] = new int [HEIGHT][WIDTH]; //  pixel grid
+//	public int grid [][] = new int [HEIGHT][WIDTH]; //  pixel grid
 	int maze [][]; // cell grid
 	
 	public Maze(String file)
@@ -112,15 +119,5 @@ public class Maze
 	public void render(GraphicsContext gc) // maintain maze DO LATER!!!!
 	{
 		
-	}
-	
-	public static void main (String args[]) throws FileNotFoundException, IOException // testing
-	{
-
-        Canvas canvas = new Canvas( 600, 500 ); // 600 pixels wide, 500 pixels tall
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-		Maze maze = new Maze("level1.txt");
-		maze.initMaze();
-		maze.loadmaze(gc);
 	}
 }
