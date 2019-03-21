@@ -12,12 +12,16 @@ public class Maze
  * 		change CELLSIZE from 30 to 20
  * 		change WIDTH from 840 to 560
  * 		change HEIGHT from 930 to 620
+ * 		change midx - 5 to midx - 3 in drawPellet method line 112
+ * 		change midy - 5 to midy -3 in drawPellet method line 112
+ * 		change size to 5 in drawPellet method line 112
+ * 
  */
 	final static int xtiles = 28; // 28 tiles wide
 	final static int ytiles = 31; // 31 tiles high
-	public final static int WIDTH = 840; // pixel width 
-	public final static int HEIGHT = 930; // pixel height 
-	final static int CELLSIZE = 30; // cell side length (square) 
+	public final static int WIDTH = 560; // pixel width 
+	public final static int HEIGHT = 620; // pixel height 
+	final static int CELLSIZE = 20; // cell side length (square) 
 	
 	final static int EMPTY = 0;
 	final static int WALL = 1;
@@ -88,6 +92,13 @@ public class Maze
 			}
 	}
 	
+	public int getMazeValue(int x, int y) // return cell value
+	{
+		int r = (int)(y / CELLSIZE);
+		int c = (int)(x / CELLSIZE);
+		return maze[r][c];
+	}
+	
 	private void drawWall(int r, int c, GraphicsContext gc) // r and c are the row and column of the cell
 	{
 		int x = c * CELLSIZE; // top left x coordinate of cell
@@ -105,7 +116,7 @@ public class Maze
 		gc.setFill(Color.YELLOW);
 		int midx = x + (CELLSIZE/2); // midpoint x of a cell
 		int midy = y + (CELLSIZE/2); // midpoint y of a cell
-		gc.fillRect(midx - 5, midy - 5, 10, 10);
+		gc.fillRect(midx - 3, midy - 3, 5, 5);
 	}
 	
 	private void drawEmpty(int r, int c, GraphicsContext gc) // r and c are the row and column of the cell
