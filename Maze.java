@@ -94,9 +94,14 @@ public class Maze
 	
 	public int getMazeValue(int x, int y) // return cell value
 	{
-		int r = (int)(y / CELLSIZE);
-		int c = (int)(x / CELLSIZE);
-		return maze[r][c];
+		try
+		{
+			return maze[x][y];
+		} catch(ArrayIndexOutOfBoundsException e)
+		{
+			// If we're off the edge, return rock
+			return 1;
+		}
 	}
 	
 	private void drawWall(int r, int c, GraphicsContext gc) // r and c are the row and column of the cell
