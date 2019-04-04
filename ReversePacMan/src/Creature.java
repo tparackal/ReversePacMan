@@ -5,7 +5,8 @@ import javafx.scene.canvas.GraphicsContext;
  * 
  * @author mike slattery
  */
-public class Creature {
+public class Creature 
+{
 	double x, y;
 	double dx, dy;
 	int look;

@@ -8,7 +8,7 @@ public class PacMan extends Creature
 	final static int UNKNOWN = 0;
 	final static int VISITED = 1;
 	final static int WALL = 2;
-	
+	boolean lastwall = false;
 	
 	public PacMan(double x1, double y1, double dx1, double dy1, int m1, int[][] maze) 
 	{
@@ -48,10 +48,10 @@ public class PacMan extends Creature
 	{
 		int result = 0;
 		boolean found = false;
-		int d = gen.nextInt(4) + 1; //  random number 1-4 inclusive
+		int d = motion; //  random number 1-4 inclusive
 		while(!found)
 		{
-			if(d == 1)
+			if(d == 1) //left
 			{
 				if(Maze.maze[row][col - 1] != Maze.WALL)
 				{
@@ -61,11 +61,17 @@ public class PacMan extends Creature
 				}
 				else
 				{
-					d = gen.nextInt(4) + 1;
+					d = gen.nextInt(2) + 3;
+					if((Maze.maze[row - 1][col] != Maze.WALL)&&(d == 3)) {
+						result = 4;
+					}
+					if((Maze.maze[row + 1][col] != Maze.WALL)&&(d == 4)) {
+						result = 3;
+					}
 				}
 			}
 		
-			if(d == 2)
+			if(d == 2) //right
 			{
 				if(Maze.maze[row][col + 1] != Maze.WALL)
 				{
@@ -75,11 +81,17 @@ public class PacMan extends Creature
 				}
 				else
 				{
-					d = gen.nextInt(4) + 1;
+					d = gen.nextInt(2) + 3;
+					if((Maze.maze[row - 1][col] != Maze.WALL)&&(d == 3)) {
+						result = 4;
+					}
+					if((Maze.maze[row + 1][col] != Maze.WALL)&&(d == 4)) {
+						result = 3;
+					}
 				}
 			}
 		
-			if(d == 3)
+			if(d == 3) //up
 			{
 				if(Maze.maze[row - 1][col] != Maze.WALL)
 				{
@@ -89,11 +101,17 @@ public class PacMan extends Creature
 				}
 				else
 				{
-					d = gen.nextInt(4) + 1;
+					d = gen.nextInt(2) + 1;
+					if((Maze.maze[row][col - 1] != Maze.WALL)&&(d == 1)) {
+						result = 2;
+					}
+					if((Maze.maze[row][col + 1] != Maze.WALL)&&(d == 2)) {
+						result = 1;
+					}
 				}
 			}
 		
-			if(d == 4)
+			if(d == 4) //down
 			{
 				if(Maze.maze[row + 1][col] != Maze.WALL)
 				{
@@ -103,7 +121,13 @@ public class PacMan extends Creature
 				}
 				else
 				{
-					d = gen.nextInt(4) + 1;
+					d = gen.nextInt(2) + 1;
+					if((Maze.maze[row][col - 1] != Maze.WALL)&&(d == 1)) {
+						result = 2;
+					}
+					if((Maze.maze[row][col + 1] != Maze.WALL)&&(d == 2)) {
+						result = 1;
+					}
 				}
 			}
 		}
