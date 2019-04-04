@@ -5,7 +5,8 @@ import javafx.scene.canvas.GraphicsContext;
  * 
  * @author mike slattery
  */
-public class Creature {
+public class Creature 
+{
 	double x, y;
 	double dx, dy;
 	int look;
@@ -44,6 +45,6 @@ public class Creature {
 	
 	public void render(GraphicsContext gc)
 	{
-		
+		//gc.drawImage(ImageManager.get(look), x-PlayField.CELLSIZE, y-PlayField.CELLSIZE);
 	}
 }
