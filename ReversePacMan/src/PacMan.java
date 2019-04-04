@@ -49,12 +49,28 @@ public class PacMan extends Creature
 		int result = 0;
 		boolean found = false;
 		int d = motion; //  random number 1-4 inclusive
+		int sidePath;
 		while(!found)
 		{
 			if(d == 1) //left
 			{
+				
 				if(Maze.maze[row][col - 1] != Maze.WALL)
 				{
+//					if(Maze.maze[row - 1][col] != Maze.WALL) {
+//						sidePath = gen.nextInt(100) + 1;
+//						if(sidePath > 10) {
+//							result = 3;
+//							break;
+//						}
+//					}
+//					if(Maze.maze[row + 1][col] != Maze.WALL) {
+//						sidePath = gen.nextInt(100) + 1;
+//						if(sidePath > 10) {
+//							result = 4;
+//							break;
+//						}
+//					}
 					result = 1;
 					found = true;
 					break;
@@ -62,19 +78,36 @@ public class PacMan extends Creature
 				else
 				{
 					d = gen.nextInt(2) + 3;
-					if((Maze.maze[row - 1][col] != Maze.WALL)&&(d == 3)) {
+					if((Maze.maze[row - 1][col] == Maze.WALL)&&(d == 3)) {
 						result = 4;
+						break;
 					}
-					if((Maze.maze[row + 1][col] != Maze.WALL)&&(d == 4)) {
+					if((Maze.maze[row + 1][col] == Maze.WALL)&&(d == 4)) {
 						result = 3;
+						break;
 					}
 				}
 			}
 		
 			if(d == 2) //right
 			{
+				
 				if(Maze.maze[row][col + 1] != Maze.WALL)
 				{
+//					if(Maze.maze[row - 1][col] != Maze.WALL) {
+//						sidePath = gen.nextInt(100) + 1;
+//						if(sidePath > 10) {
+//							result = 3;
+//							break;
+//						}
+//					}
+//					if(Maze.maze[row + 1][col] != Maze.WALL) {
+//						sidePath = gen.nextInt(100) + 1;
+//						if(sidePath > 10) {
+//							result = 4;
+//							break;
+//						}
+//					}
 					result = 2;
 					found = true;
 					break;
@@ -82,19 +115,36 @@ public class PacMan extends Creature
 				else
 				{
 					d = gen.nextInt(2) + 3;
-					if((Maze.maze[row - 1][col] != Maze.WALL)&&(d == 3)) {
+					if((Maze.maze[row - 1][col] == Maze.WALL)&&(d == 3)) {
 						result = 4;
+						break;
 					}
-					if((Maze.maze[row + 1][col] != Maze.WALL)&&(d == 4)) {
+					if((Maze.maze[row + 1][col] == Maze.WALL)&&(d == 4)) {
 						result = 3;
+						break;
 					}
 				}
 			}
 		
 			if(d == 3) //up
 			{
+				
 				if(Maze.maze[row - 1][col] != Maze.WALL)
 				{
+//					if(Maze.maze[row][col - 1] != Maze.WALL) {
+//						sidePath = gen.nextInt(100) + 1;
+//						if(sidePath > 10) {
+//							result = 1;
+//							break;
+//						}
+//					}
+//					if(Maze.maze[row][col + 1] != Maze.WALL) {
+//						sidePath = gen.nextInt(100) + 1;
+//						if(sidePath > 10) {
+//							result = 2;
+//							break;
+//						}
+//					}
 					result = 3;
 					found = true;
 					break;
@@ -102,19 +152,36 @@ public class PacMan extends Creature
 				else
 				{
 					d = gen.nextInt(2) + 1;
-					if((Maze.maze[row][col - 1] != Maze.WALL)&&(d == 1)) {
+					if((Maze.maze[row][col - 1] == Maze.WALL)&&(d == 1)) {
 						result = 2;
+						break;
 					}
-					if((Maze.maze[row][col + 1] != Maze.WALL)&&(d == 2)) {
+					if((Maze.maze[row][col + 1] == Maze.WALL)&&(d == 2)) {
 						result = 1;
+						break;
 					}
 				}
 			}
 		
 			if(d == 4) //down
 			{
+				
 				if(Maze.maze[row + 1][col] != Maze.WALL)
 				{
+//					if(Maze.maze[row][col - 1] != Maze.WALL) {
+//						sidePath = gen.nextInt(100) + 1;
+//						if(sidePath > 10) {
+//							result = 1;
+//							break;
+//						}
+//					}
+//					if(Maze.maze[row][col + 1] != Maze.WALL) {
+//						sidePath = gen.nextInt(100) + 1;
+//						if(sidePath > 10) {
+//							result = 2;
+//							break;
+//						}
+//					}
 					result = 4;
 					found = true;
 					break;
@@ -122,11 +189,13 @@ public class PacMan extends Creature
 				else
 				{
 					d = gen.nextInt(2) + 1;
-					if((Maze.maze[row][col - 1] != Maze.WALL)&&(d == 1)) {
+					if((Maze.maze[row][col - 1] == Maze.WALL)&&(d == 1)) {
 						result = 2;
+						break;
 					}
-					if((Maze.maze[row][col + 1] != Maze.WALL)&&(d == 2)) {
+					if((Maze.maze[row][col + 1] == Maze.WALL)&&(d == 2)) {
 						result = 1;
+						break;
 					}
 				}
 			}
