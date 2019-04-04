@@ -17,8 +17,8 @@ public class Maze
  * 		change size to 5 in drawPellet method line 112
  * 
  */
-	final static int xtiles = 28; // 28 tiles wide
-	final static int ytiles = 31; // 31 tiles high
+	public final static int xtiles = 28; // 28 tiles wide
+	public final static int ytiles = 31; // 31 tiles high
 	public final static int WIDTH = 560; // pixel width 
 	public final static int HEIGHT = 620; // pixel height 
 	final static int CELLSIZE = 20; // cell side length (square) 
@@ -29,7 +29,7 @@ public class Maze
 	
 	String filename;
 //	public int grid [][] = new int [HEIGHT][WIDTH]; //  pixel grid
-	int[][] maze; // cell grid
+	public static int[][] maze; // cell grid
 	
 	public Maze(String file)
 	{
@@ -130,6 +130,18 @@ public class Maze
 		int y = r * CELLSIZE; // top left y coordinate of cell
 		gc.setFill(Color.BLACK);
 		gc.fillRect(x, y, CELLSIZE, CELLSIZE);
+	}
+	
+	public static int toRow(double y) // convert pixel y coordinate to cell row coordinate
+	{
+		int row = (int)(y / Maze.CELLSIZE);
+		return row;
+	}
+	
+	public static int toCol(double x) // convert pixel x coordinate to cell column coordinate
+	{
+		int col = (int)(x / Maze.CELLSIZE);
+		return col;
 	}
 	
 	public void render(GraphicsContext gc) // maintain maze DO LATER!!!!
