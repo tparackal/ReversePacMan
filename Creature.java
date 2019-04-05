@@ -2,7 +2,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Parent class of all moving actors (sprites)
- * 
+ * (We are using this as a super class for our characters)
  * @author mike slattery
  */
 public class Creature 
