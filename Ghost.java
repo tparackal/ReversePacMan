@@ -1,4 +1,6 @@
 import javafx.geometry.*;
+import javafx.scene.paint.Color;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Class for the first ghost
@@ -39,6 +41,19 @@ public class Ghost extends Creature
 		{
 			motion=0;
 		}
+	}
+	
+	public void render(GraphicsContext gc)
+	{
+		gc.setFill(Color.AQUAMARINE); // ghost 1
+//		int col = (int) (creatures[0].x / Maze.CELLSIZE);
+// 		int row = (int) (creatures[0].y / Maze.CELLSIZE);
+ 		int col = Maze.toCol(x);
+ 		int row = Maze.toRow(y);
+ 		double topleftX = col * Maze.CELLSIZE;
+ 		double topleftY = row * Maze.CELLSIZE;
+ 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
+// 		gc.fillRect(creatures[0].x, creatures[0].y, Maze.CELLSIZE, Maze.CELLSIZE);
 	}
 	
 }

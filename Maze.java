@@ -76,9 +76,9 @@ public class Maze
 //		}
 	}
 	
-	public void loadmaze(GraphicsContext gc) // draw map based on 2d array
+	public void render(GraphicsContext gc) // maze render method
 	{
-		for(int r = 0; r < ytiles; r++)
+		for(int r = 0; r < ytiles; r++) // draw map based on 2d array
 			for(int c = 0; c < xtiles; c++)
 			{
 				int val = maze[r][c];
@@ -108,8 +108,10 @@ public class Maze
 			return 1;
 		}
 	}
-	void consumePellet(int r, int c) {
-		if(maze[r][c] == PELLET){
+	void consumePellet(int r, int c) 
+	{
+		if(maze[r][c] == PELLET)
+		{
 			maze[r][c] = EMPTY;
 		}
 	}
@@ -151,10 +153,5 @@ public class Maze
 	{
 		int col = (int)(x / Maze.CELLSIZE);
 		return col;
-	}
-	
-	public void render(GraphicsContext gc) // maintain maze DO LATER!!!!
-	{
-		
 	}
 }

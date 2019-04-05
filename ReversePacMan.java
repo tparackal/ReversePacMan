@@ -36,7 +36,11 @@ public class ReversePacMan extends Application
 			new Point2D(-1,0), new Point2D(1,0),
 			new Point2D(0,-1), new Point2D(0,1)
 	};
-	Image pacMan1, pacMan2, pacMan3, pacMan4, pacMan5;
+	public static Image pacMan1;
+	public static Image pacMan2;
+	public static Image pacMan3;
+	public static Image pacMan4;
+	public static Image pacMan5;
 	public static void main(String[] args) 
 	{
 		launch(args);
@@ -85,103 +89,150 @@ public class ReversePacMan extends Application
 		{
 			creatures[i].update();
 		}
+		collision(); // detect collision between Pacman and ghosts
 	}
-	void render(GraphicsContext gc) throws FileNotFoundException, IOException
-	{
+//	void render(GraphicsContext gc) throws FileNotFoundException, IOException
+//	{
 //	    	Canvas canvas = new Canvas( 600, 500 ); // 600 pixels wide, 500 pixels tall
 //	 		maze = new Maze("level1.txt");
 //	 		maze.initMaze();
-	 		maze1.loadmaze(gc);
-	 		gc.setFill(Color.AQUAMARINE); // ghost 1
+//	 		maze1.loadmaze(gc);
+//	 		gc.setFill(Color.AQUAMARINE); // ghost 1
 //	 		int col = (int) (creatures[0].x / Maze.CELLSIZE);
 //	 		int row = (int) (creatures[0].y / Maze.CELLSIZE);
-	 		int col = Maze.toCol(creatures[0].x);
-	 		int row = Maze.toRow(creatures[0].y);
-	 		double topleftX = col * Maze.CELLSIZE;
-	 		double topleftY = row * Maze.CELLSIZE;
-	 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
+//	 		int col = Maze.toCol(creatures[0].x);
+//	 		int row = Maze.toRow(creatures[0].y);
+//	 		double topleftX = col * Maze.CELLSIZE;
+//	 		double topleftY = row * Maze.CELLSIZE;
+//	 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
 //	 		gc.fillRect(creatures[0].x, creatures[0].y, Maze.CELLSIZE, Maze.CELLSIZE);
-	 		
-	 		
-	 		gc.setFill(Color.RED); // ghost 2
+//	 		
+//	 		
+//	 		gc.setFill(Color.RED); // ghost 2
 //	 		col = (int) (creatures[1].x / Maze.CELLSIZE);
 //	 		row = (int) (creatures[1].y / Maze.CELLSIZE);
-	 		col = Maze.toCol(creatures[1].x);
-	 		row = Maze.toRow(creatures[1].y);
-	 		topleftX = col * Maze.CELLSIZE;
-	 		topleftY = row * Maze.CELLSIZE;
-	 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
+//	 		col = Maze.toCol(creatures[1].x);
+//	 		row = Maze.toRow(creatures[1].y);
+//	 		topleftX = col * Maze.CELLSIZE;
+//	 		topleftY = row * Maze.CELLSIZE;
+//	 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
 //	 		gc.fillRect(creatures[1].x, creatures[1].y, Maze.CELLSIZE, Maze.CELLSIZE);
-	 		
-	 		gc.setFill(Color.YELLOW);
-	 		col = Maze.toCol(creatures[2].x);
-	 		row = Maze.toRow(creatures[2].y);
-	 		topleftX = col * Maze.CELLSIZE;
-	 		topleftY = row * Maze.CELLSIZE;
-	 		if(PacState == 1){
-	 			gc.drawImage(pacMan1, topleftX, topleftY);
-	 			PacState = 2;
-	 		}
-	 		else if(PacState == 2){
-	 			gc.drawImage(pacMan2, topleftX, topleftY);
-	 			PacState = 1;
-	 		}
-	 		//gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
-	}
+//	 		
+//	 		gc.setFill(Color.YELLOW);
+//	 		col = Maze.toCol(creatures[2].x);
+//	 		row = Maze.toRow(creatures[2].y);
+//	 		topleftX = col * Maze.CELLSIZE;
+//	 		topleftY = row * Maze.CELLSIZE;
+//	 		if(PacState == 1){
+//	 			gc.drawImage(pacMan1, topleftX, topleftY);
+//	 			PacState = 2;
+//	 		}
+//	 		else if(PacState == 2){
+//	 			gc.drawImage(pacMan2, topleftX, topleftY);
+//	 			PacState = 1;
+//	 		}
+//	 		//gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
+//	}
 	void render(GraphicsContext top_gc, GraphicsContext gc ) {
-		maze1.loadmaze(gc);
+		maze1.render(gc);
 		drawTop(top_gc);
-		gc.setFill(Color.AQUAMARINE); // ghost 1
+		for(int i = 0; i < 3; i++)
+		{
+			creatures[i].render(gc);
+		}
+		
+//		gc.setFill(Color.AQUAMARINE); // ghost 1
 //		int col = (int) (creatures[0].x / Maze.CELLSIZE);
 // 		int row = (int) (creatures[0].y / Maze.CELLSIZE);
- 		int col = Maze.toCol(creatures[0].x);
- 		int row = Maze.toRow(creatures[0].y);
- 		double topleftX = col * Maze.CELLSIZE;
- 		double topleftY = row * Maze.CELLSIZE;
- 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
+// 		int col = Maze.toCol(creatures[0].x);
+// 		int row = Maze.toRow(creatures[0].y);
+// 		double topleftX = col * Maze.CELLSIZE;
+// 		double topleftY = row * Maze.CELLSIZE;
+// 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
 // 		gc.fillRect(creatures[0].x, creatures[0].y, Maze.CELLSIZE, Maze.CELLSIZE);
  		
  		
- 		gc.setFill(Color.RED); // ghost 2
+// 		gc.setFill(Color.RED); // ghost 2
 // 		col = (int) (creatures[1].x / Maze.CELLSIZE);
 // 		row = (int) (creatures[1].y / Maze.CELLSIZE);
- 		col = Maze.toCol(creatures[1].x);
- 		row = Maze.toRow(creatures[1].y);
- 		topleftX = col * Maze.CELLSIZE;
- 		topleftY = row * Maze.CELLSIZE;
- 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
+// 		col = Maze.toCol(creatures[1].x);
+// 		row = Maze.toRow(creatures[1].y);
+// 		topleftX = col * Maze.CELLSIZE;
+// 		topleftY = row * Maze.CELLSIZE;
+// 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
 // 		gc.fillRect(creatures[1].x, creatures[1].y, Maze.CELLSIZE, Maze.CELLSIZE);
  		
- 		gc.setFill(Color.YELLOW);
- 		col = Maze.toCol(creatures[2].x);
- 		row = Maze.toRow(creatures[2].y);
- 		topleftX = col * Maze.CELLSIZE;
- 		topleftY = row * Maze.CELLSIZE;
- 		if(PacState == 1){
- 			if(creatures[2].motion == 1){
- 				gc.drawImage(pacMan1, topleftX, topleftY);
- 				PacState = 2;
- 			}
- 			if(creatures[2].motion == 2){
- 				gc.drawImage(pacMan2, topleftX, topleftY);
- 				PacState = 2;
- 			}
- 			if(creatures[2].motion == 3){
- 				gc.drawImage(pacMan3, topleftX, topleftY);
- 				PacState = 2;
- 			}
- 			if(creatures[2].motion == 4){
- 				gc.drawImage(pacMan4, topleftX, topleftY);
- 				PacState = 2;
- 			}
- 			
- 		}
- 		else if(PacState == 2){
- 			gc.drawImage(pacMan5, topleftX, topleftY);
- 			PacState = 1;
- 		}
+// 		gc.setFill(Color.YELLOW);
+// 		col = Maze.toCol(creatures[2].x);
+// 		row = Maze.toRow(creatures[2].y);
+// 		topleftX = col * Maze.CELLSIZE;
+// 		topleftY = row * Maze.CELLSIZE;
+// 		if(PacState == 1){
+// 			if(creatures[2].motion == 1){
+// 				gc.drawImage(pacMan1, topleftX, topleftY);
+// 				PacState = 2;
+// 			}
+// 			if(creatures[2].motion == 2){
+// 				gc.drawImage(pacMan2, topleftX, topleftY);
+// 				PacState = 2;
+// 			}
+// 			if(creatures[2].motion == 3){
+// 				gc.drawImage(pacMan3, topleftX, topleftY);
+// 				PacState = 2;
+// 			}
+// 			if(creatures[2].motion == 4){
+// 				gc.drawImage(pacMan4, topleftX, topleftY);
+// 				PacState = 2;
+// 			}
+// 			
+// 		}
+// 		else if(PacState == 2){
+// 			gc.drawImage(pacMan5, topleftX, topleftY);
+// 			PacState = 1;
+// 		}
  		//gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
 	}
+	
+	public void collision() // checks if Pacman is captured by the ghosts
+	{
+		if(((creatures[2].x <= creatures[1].x + 10) && (creatures[2].x + 10 >= creatures[1].x)) && ((creatures[2].y <= creatures[1].y + 10) && (creatures[2].y + 10 >= creatures[1].y)))
+		{
+			lives--; // Pacman loses a life
+			
+			// reset Pacman to his starting position
+			creatures[2].x = 280;
+			creatures[2].y = 460;
+			creatures[2].motion = 1;
+			
+			// reset ghosts to their starting positions
+			creatures[0].x = 12*Maze.CELLSIZE;
+			creatures[0].y = 14*Maze.CELLSIZE;
+			creatures[0].motion = 0;
+			
+			creatures[1].x = 15*Maze.CELLSIZE;
+			creatures[1].y = 14*Maze.CELLSIZE;
+			creatures[1].motion = 0;
+		}
+		else if(((creatures[2].x <= creatures[0].x + 10) && (creatures[2].x + 10 >= creatures[0].x)) && ((creatures[2].y <= creatures[0].y + 10) && (creatures[2].y + 10 >= creatures[0].y)))
+		{
+			lives--; // Pacman loses a life
+			
+			// reset Pacman to his starting position
+			creatures[2].x = 280;
+			creatures[2].y = 460;
+			creatures[2].motion = 1;
+			
+			// reset ghosts to their starting positions
+			creatures[0].x = 12*Maze.CELLSIZE;
+			creatures[0].y = 14*Maze.CELLSIZE;
+			creatures[0].motion = 0;
+						
+			creatures[1].x = 15*Maze.CELLSIZE;
+			creatures[1].y = 14*Maze.CELLSIZE;
+			creatures[1].motion = 0;
+		}
+	}
+	
 	void drawTop(GraphicsContext top_gc){
 		top_gc.setFill(Color.WHITE);
 		top_gc.setStroke(Color.WHITE);
@@ -217,7 +268,7 @@ public class ReversePacMan extends Application
         
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GraphicsContext top_gc = canvas.getGraphicsContext2D();
-        render(gc);
+//        render(gc);
         setHandlers(theScene);
         KeyFrame kf = new KeyFrame(Duration.millis(1000 / FPS),
 				e -> {

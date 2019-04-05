@@ -1,4 +1,6 @@
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
+import javafx.scene.canvas.GraphicsContext;
 import java.util.Random;
 
 /**
@@ -109,6 +111,38 @@ public class PacMan extends Creature
 //		{
 //			motion = getDirection(row, col); 
 //		}
+	}
+	
+	public void render(GraphicsContext gc)
+	{
+ 		gc.setFill(Color.YELLOW);
+ 		int col = Maze.toCol(x);
+ 		int row = Maze.toRow(y);
+ 		int topleftX = col * Maze.CELLSIZE;
+ 		int topleftY = row * Maze.CELLSIZE;
+ 		if(ReversePacMan.PacState == 1){
+ 			if(motion == 1){
+ 				gc.drawImage(ReversePacMan.pacMan1, topleftX, topleftY);
+ 				ReversePacMan.PacState = 2;
+ 			}
+ 			if(motion == 2){
+ 				gc.drawImage(ReversePacMan.pacMan2, topleftX, topleftY);
+ 				ReversePacMan.PacState = 2;
+ 			}
+ 			if(motion == 3){
+ 				gc.drawImage(ReversePacMan.pacMan3, topleftX, topleftY);
+ 				ReversePacMan.PacState = 2;
+ 			}
+ 			if(motion == 4){
+ 				gc.drawImage(ReversePacMan.pacMan4, topleftX, topleftY);
+ 				ReversePacMan.PacState = 2;
+ 			}
+ 			
+ 		}
+ 		else if(ReversePacMan.PacState == 2){
+ 			gc.drawImage(ReversePacMan.pacMan5, topleftX, topleftY);
+ 			ReversePacMan.PacState = 1;
+ 		}
 	}
 	
 	public int getDirection(int row, int col) // Pac man moves randomly within the maze

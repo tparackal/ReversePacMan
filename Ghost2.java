@@ -1,4 +1,6 @@
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  * Class for the second ghost
@@ -38,5 +40,18 @@ public class Ghost2 extends Creature
 		{
 			motion=0;
 		}
+	}
+	
+	public void render(GraphicsContext gc)
+	{
+ 		gc.setFill(Color.RED); // ghost 2
+// 		col = (int) (creatures[1].x / Maze.CELLSIZE);
+// 		row = (int) (creatures[1].y / Maze.CELLSIZE);
+ 		int col = Maze.toCol(x);
+ 		int row = Maze.toRow(y);
+ 		int topleftX = col * Maze.CELLSIZE;
+ 		int topleftY = row * Maze.CELLSIZE;
+ 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
+// 		gc.fillRect(creatures[1].x, creatures[1].y, Maze.CELLSIZE, Maze.CELLSIZE);
 	}
 }
