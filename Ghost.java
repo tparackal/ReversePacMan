@@ -52,7 +52,19 @@ public class Ghost extends Creature
  		int row = Maze.toRow(y);
  		double topleftX = col * Maze.CELLSIZE;
  		double topleftY = row * Maze.CELLSIZE;
- 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
+ 		if(motion == 1){
+ 			gc.drawImage(ReversePacMan.ghost1Left, topleftX, topleftY);
+ 		}
+ 		if(motion == 2){
+ 			gc.drawImage(ReversePacMan.ghost1Right, topleftX, topleftY);
+ 		}
+ 		if(motion == 3){
+ 			gc.drawImage(ReversePacMan.ghost1Up, topleftX, topleftY);
+ 		}
+ 		if((motion == 4)||(motion == 0)){
+ 			gc.drawImage(ReversePacMan.ghost1Down, topleftX, topleftY);
+ 		}
+// 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
 // 		gc.fillRect(creatures[0].x, creatures[0].y, Maze.CELLSIZE, Maze.CELLSIZE);
 	}
 	

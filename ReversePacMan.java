@@ -41,6 +41,8 @@ public class ReversePacMan extends Application
 	public static Image pacMan3;
 	public static Image pacMan4;
 	public static Image pacMan5;
+	public static Image ghost1Left, ghost1Right, ghost1Up, ghost1Down, 
+			ghost2Left, ghost2Right, ghost2Up, ghost2Down;
 	public static void main(String[] args) 
 	{
 		launch(args);
@@ -263,6 +265,14 @@ public class ReversePacMan extends Application
         pacMan3 = new Image("PacmanUp.png");
         pacMan4 = new Image("PacmanDown.png");
         pacMan5 = new Image("Pacman.png");
+        ghost1Left = new Image("Ghost1Left.png");
+        ghost1Right = new Image("Ghost1Right.png");
+        ghost1Up = new Image("Ghost1Up.png");
+        ghost1Down = new Image("Ghost1Down.png");
+        ghost2Left = new Image("Ghost2Left.png");
+        ghost2Right = new Image("Ghost2Right.png");
+        ghost2Up = new Image("Ghost2Up.png");
+        ghost2Down = new Image("Ghost2Down.png");
         Canvas canvas = new Canvas( Maze.WIDTH, Maze.HEIGHT ); // 840 pixels wide, 930 pixels tall
         root.getChildren().add( canvas );
         
