@@ -108,7 +108,11 @@ public class Maze
 			return 1;
 		}
 	}
-	
+	void consumePellet(int r, int c) {
+		if(maze[r][c] == PELLET){
+			maze[r][c] = EMPTY;
+		}
+	}
 	private void drawWall(int r, int c, GraphicsContext gc) // r and c are the row and column of the cell
 	{
 		int x = c * CELLSIZE; // top left x coordinate of cell
