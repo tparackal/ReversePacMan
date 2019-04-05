@@ -12,7 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
+import javafx.scene.image.Image;
 /**
  * Main class
  * 
@@ -31,10 +31,12 @@ public class ReversePacMan extends Application
 	public static int score = 0;
 	public static int levelscore = 10000;
 	public static int lives = 3;
+	public static int PacState = 1;
 	public static Point2D[] dirs = {new Point2D(0,0),
 			new Point2D(-1,0), new Point2D(1,0),
 			new Point2D(0,-1), new Point2D(0,1)
 	};
+	Image pacMan1, pacMan2, pacMan3, pacMan4, pacMan5;
 	public static void main(String[] args) 
 	{
 		launch(args);
@@ -116,7 +118,15 @@ public class ReversePacMan extends Application
 	 		row = Maze.toRow(creatures[2].y);
 	 		topleftX = col * Maze.CELLSIZE;
 	 		topleftY = row * Maze.CELLSIZE;
-	 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
+	 		if(PacState == 1){
+	 			gc.drawImage(pacMan1, topleftX, topleftY);
+	 			PacState = 2;
+	 		}
+	 		else if(PacState == 2){
+	 			gc.drawImage(pacMan2, topleftX, topleftY);
+	 			PacState = 1;
+	 		}
+	 		//gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
 	}
 	void render(GraphicsContext top_gc, GraphicsContext gc ) {
 		maze1.loadmaze(gc);
@@ -147,7 +157,30 @@ public class ReversePacMan extends Application
  		row = Maze.toRow(creatures[2].y);
  		topleftX = col * Maze.CELLSIZE;
  		topleftY = row * Maze.CELLSIZE;
- 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
+ 		if(PacState == 1){
+ 			if(creatures[2].motion == 1){
+ 				gc.drawImage(pacMan1, topleftX, topleftY);
+ 				PacState = 2;
+ 			}
+ 			if(creatures[2].motion == 2){
+ 				gc.drawImage(pacMan2, topleftX, topleftY);
+ 				PacState = 2;
+ 			}
+ 			if(creatures[2].motion == 3){
+ 				gc.drawImage(pacMan3, topleftX, topleftY);
+ 				PacState = 2;
+ 			}
+ 			if(creatures[2].motion == 4){
+ 				gc.drawImage(pacMan4, topleftX, topleftY);
+ 				PacState = 2;
+ 			}
+ 			
+ 		}
+ 		else if(PacState == 2){
+ 			gc.drawImage(pacMan5, topleftX, topleftY);
+ 			PacState = 1;
+ 		}
+ 		//gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
 	}
 	void drawTop(GraphicsContext top_gc){
 		top_gc.setFill(Color.WHITE);
@@ -162,25 +195,6 @@ public class ReversePacMan extends Application
 		gc.fillText(s, x, y);
 		gc.strokeText(s, x, y);
 	}
-	public void collision() // checks if Pacman is captured by the ghosts
-	{
-		if(((creatures[2].x <= creatures[1].x + 10) && (creatures[2].x + 10 >= creatures[1].x)) && ((creatures[2].y <= creatures[1].y + 10) && (creatures[2].y + 10 >= creatures[1].y)))
-		{
-			lives--; // Pacman loses a life
-			// reset Pacman to his starting position
-			creatures[2].x = 280;
-			creatures[2].y = 460;
-			creatures[2].motion = 1;
-		}
-		else if(((creatures[2].x <= creatures[0].x + 10) && (creatures[2].x + 10 >= creatures[0].x)) && ((creatures[2].y <= creatures[0].y + 10) && (creatures[2].y + 10 >= creatures[0].y)))
-		{
-			lives--; // Pacman loses a life
-			// reset Pacman to his starting position
-			creatures[2].x = 280;
-			creatures[2].y = 460;
-			creatures[2].motion = 1;
-		}
-	}
 	@Override
     public void start(Stage theStage) throws FileNotFoundException, IOException 
     {
@@ -193,7 +207,11 @@ public class ReversePacMan extends Application
         Group root = new Group();
         Scene theScene = new Scene( root );
         theStage.setScene( theScene );
-        
+        pacMan1 = new Image("PacmanLeft.png");
+        pacMan2 = new Image("PacmanRight.png");
+        pacMan3 = new Image("PacmanUp.png");
+        pacMan4 = new Image("PacmanDown.png");
+        pacMan5 = new Image("Pacman.png");
         Canvas canvas = new Canvas( Maze.WIDTH, Maze.HEIGHT ); // 840 pixels wide, 930 pixels tall
         root.getChildren().add( canvas );
         
