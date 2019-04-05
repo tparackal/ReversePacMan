@@ -162,6 +162,25 @@ public class ReversePacMan extends Application
 		gc.fillText(s, x, y);
 		gc.strokeText(s, x, y);
 	}
+	public void collision() // checks if Pacman is captured by the ghosts
+	{
+		if(((creatures[2].x <= creatures[1].x + 10) && (creatures[2].x + 10 >= creatures[1].x)) && ((creatures[2].y <= creatures[1].y + 10) && (creatures[2].y + 10 >= creatures[1].y)))
+		{
+			lives--; // Pacman loses a life
+			// reset Pacman to his starting position
+			creatures[2].x = 280;
+			creatures[2].y = 460;
+			creatures[2].motion = 1;
+		}
+		else if(((creatures[2].x <= creatures[0].x + 10) && (creatures[2].x + 10 >= creatures[0].x)) && ((creatures[2].y <= creatures[0].y + 10) && (creatures[2].y + 10 >= creatures[0].y)))
+		{
+			lives--; // Pacman loses a life
+			// reset Pacman to his starting position
+			creatures[2].x = 280;
+			creatures[2].y = 460;
+			creatures[2].motion = 1;
+		}
+	}
 	@Override
     public void start(Stage theStage) throws FileNotFoundException, IOException 
     {
