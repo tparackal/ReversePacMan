@@ -15,6 +15,7 @@ public class PacMan extends Creature
 	final static int UNKNOWN = 0;
 	final static int VISITED = 1;
 	final static int WALL = 2;
+
 //	boolean lastwall = false;
 	
 	public PacMan(double x1, double y1, double dx1, double dy1, int m1, int[][] maze) 
@@ -40,6 +41,10 @@ public class PacMan extends Creature
 		super.update();
 		int col = Maze.toCol(x);
 		int row = Maze.toRow(y);
+		if(ReversePacMan.maze1.getMazeValue(row, col) == Maze.PELLET) {
+			ReversePacMan.maze1.consumePellet(row, col);
+			pelletsConsumed++;
+		}
 		visited[row][col] = VISITED; // mark that Pacman has visited this cell
 		if((row == 14) && (col == 0) && (motion == 1)) //  set Pacman to the right side if it goes to the left side
 		{

@@ -12,7 +12,7 @@ public class Creature
 	int look;
 	int motion;
 	int ccount;
-
+	int pelletsConsumed = 0;
 	public Creature(double x1, double y1, double dx1, double dy1, int m1)
 	{
 		x = x1; y = y1;

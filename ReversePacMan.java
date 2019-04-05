@@ -28,6 +28,9 @@ public class ReversePacMan extends Application
 	public static Creature[] creatures = new Creature[6];
 	public static int dir;
 	public static int dir2;
+	public static int score = 0;
+	public static int levelscore = 10000;
+	public static int lives = 3;
 	public static Point2D[] dirs = {new Point2D(0,0),
 			new Point2D(-1,0), new Point2D(1,0),
 			new Point2D(0,-1), new Point2D(0,1)
@@ -115,8 +118,9 @@ public class ReversePacMan extends Application
 	 		topleftY = row * Maze.CELLSIZE;
 	 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
 	}
-	void renderCreatures(GraphicsContext gc ) {
+	void render(GraphicsContext top_gc, GraphicsContext gc ) {
 		maze1.loadmaze(gc);
+		drawTop(top_gc);
 		gc.setFill(Color.AQUAMARINE); // ghost 1
 //		int col = (int) (creatures[0].x / Maze.CELLSIZE);
 // 		int row = (int) (creatures[0].y / Maze.CELLSIZE);
@@ -145,6 +149,19 @@ public class ReversePacMan extends Application
  		topleftY = row * Maze.CELLSIZE;
  		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
 	}
+	void drawTop(GraphicsContext top_gc){
+		top_gc.setFill(Color.WHITE);
+		top_gc.setStroke(Color.WHITE);
+		int pellets = creatures[2].pelletsConsumed;
+		int scoreLoss = pellets * 40;
+		drawText(top_gc, "LEVEL SCORE: " + (levelscore-scoreLoss), 20, 15);
+		drawText(top_gc, "LIVES: " + lives, 480, 15);
+	}
+	void drawText(GraphicsContext gc, String s, double x, double y)
+	{
+		gc.fillText(s, x, y);
+		gc.strokeText(s, x, y);
+	}
 	@Override
     public void start(Stage theStage) throws FileNotFoundException, IOException 
     {
@@ -162,6 +179,7 @@ public class ReversePacMan extends Application
         root.getChildren().add( canvas );
         
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        GraphicsContext top_gc = canvas.getGraphicsContext2D();
         render(gc);
         setHandlers(theScene);
         KeyFrame kf = new KeyFrame(Duration.millis(1000 / FPS),
@@ -169,7 +187,7 @@ public class ReversePacMan extends Application
 					// update position
 					update();
 					// draw frame
-					renderCreatures(gc);
+					render(top_gc, gc);
 				}
 			);
         Timeline mainLoop = new Timeline(kf);
