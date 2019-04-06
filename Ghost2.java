@@ -32,10 +32,11 @@ public class Ghost2 extends Creature
 			y = 14 * Maze.CELLSIZE;
 			return;
 		}
+		
 		motion=ReversePacMan.dir2;
-//		int jcol = ((int)x)/Maze.CELLSIZE; int jrow = ((int)y)/Maze.CELLSIZE;
 		Point2D dvec = ReversePacMan.dirs[ReversePacMan.dir2];
 		int inFront = ReversePacMan.maze1.getMazeValue(row+(int)dvec.getY(), col+(int)dvec.getX());
+		
 		if(inFront==Maze.WALL) // ghost does not go through wall
 		{
 			motion=0;
@@ -45,25 +46,25 @@ public class Ghost2 extends Creature
 	public void render(GraphicsContext gc)
 	{
  		gc.setFill(Color.RED); // ghost 2
-// 		col = (int) (creatures[1].x / Maze.CELLSIZE);
-// 		row = (int) (creatures[1].y / Maze.CELLSIZE);
  		int col = Maze.toCol(x);
  		int row = Maze.toRow(y);
  		int topleftX = col * Maze.CELLSIZE;
  		int topleftY = row * Maze.CELLSIZE;
- 		if(motion == 1){
+ 		if(motion == 1)
+		{
  			gc.drawImage(ReversePacMan.ghost2Left, topleftX, topleftY);
  		}
- 		if(motion == 2){
+ 		if(motion == 2)
+		{
  			gc.drawImage(ReversePacMan.ghost2Right, topleftX, topleftY);
  		}
- 		if(motion == 3){
+ 		if(motion == 3)
+		{
  			gc.drawImage(ReversePacMan.ghost2Up, topleftX, topleftY);
  		}
- 		if((motion == 4)||(motion == 0)){
+ 		if((motion == 4)||(motion == 0))
+		{
  			gc.drawImage(ReversePacMan.ghost2Down, topleftX, topleftY);
  		}
-// 		gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
-// 		gc.fillRect(creatures[1].x, creatures[1].y, Maze.CELLSIZE, Maze.CELLSIZE);
 	}
 }

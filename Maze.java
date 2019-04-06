@@ -11,17 +11,6 @@ import javafx.scene.paint.Color;
  */
 public class Maze 
 {
-/*
- * NOTE: If map is too big for the screen,
- * 
- * 		change CELLSIZE from 30 to 20
- * 		change WIDTH from 840 to 560
- * 		change HEIGHT from 930 to 620
- * 		change midx - 5 to midx - 3 in drawPellet method line 112
- * 		change midy - 5 to midy -3 in drawPellet method line 112
- * 		change size to 5 in drawPellet method line 112
- * 
- */
 	public final static int xtiles = 28; // 28 tiles wide
 	public final static int ytiles = 31; // 31 tiles high
 	public final static int WIDTH = 560; // pixel width 
@@ -33,7 +22,6 @@ public class Maze
 	final static int PELLET = 2;
 	
 	String filename;
-//	public int grid [][] = new int [HEIGHT][WIDTH]; //  pixel grid
 	public static int[][] maze; // cell grid
 	
 	public Maze(String file)
@@ -65,15 +53,6 @@ public class Maze
 			}
 		}
 		fin.close();
-		
-		// test if the array is initialized properly
-		
-//		for(int i = 0; i < ytiles; i++) 
-//		{
-//			for(int j = 0; j < xtiles; j++)
-//				System.out.print(maze[i][j]);
-//			System.out.println();
-//		}
 	}
 	
 	public void render(GraphicsContext gc) // maze render method
@@ -104,11 +83,10 @@ public class Maze
 			return maze[x][y];
 		} catch(ArrayIndexOutOfBoundsException e)
 		{
-			// If we're off the edge, return rock
 			return 1;
 		}
 	}
-	void consumePellet(int r, int c) 
+	void consumePellet(int r, int c) // change pellet space to empty space when Pacman consumes pellet
 	{
 		if(maze[r][c] == PELLET)
 		{

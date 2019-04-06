@@ -11,14 +11,12 @@ import java.util.Random;
 public class PacMan extends Creature
 {
 	Random gen = new Random();
-	public int visited [][]; //= new int [Maze.xtiles][Maze.ytiles]; //  keeps track of what cells PacMan has visited
+	public int visited [][];
 	public int [] crossX = {6, 9, 12, 15, 18, 21, 21, 26, 21, 15, 21, 18, 18, 18, 21, 18, 21, 24, 15, 12, 15, 3, 9, 6, 9, 6, 9, 9, 6, 12, 6, 6, 1}; // col coordinates of intersections
 	public int [] crossY = {1, 5, 5, 5, 5, 1, 5, 5, 8, 11, 14, 14, 17, 20, 20, 23, 23, 26, 29, 29, 23, 26, 23, 23, 20, 20, 17, 14, 14, 11, 8, 5, 5}; // row coordinates of intersections
 	final static int UNKNOWN = 0;
 	final static int VISITED = 1;
 	final static int WALL = 2;
-
-//	boolean lastwall = false;
 	
 	public PacMan(double x1, double y1, double dx1, double dy1, int m1, int[][] maze) 
 	{
@@ -61,9 +59,9 @@ public class PacMan extends Creature
 			return;
 		}
 		
-		for(int i = 0; i < crossX.length; i++)
+		for(int i = 0; i < crossX.length; i++) // checks if Pacman reaches an intersection
 		{
-			if((col == crossX[i]) && (row == crossY[i]))
+			if((col == crossX[i]) && (row == crossY[i])) // change direction or maintain course when Pacman reaches an intersection
 			{
 				boolean back = false;
 				int d = gen.nextInt(4) + 1;
@@ -95,22 +93,12 @@ public class PacMan extends Creature
 			}
 		}
 		
-//		motion = getDirection(row, col);
-//		int jcol = ((int)x)/Maze.CELLSIZE; int jrow = ((int)y)/Maze.CELLSIZE;
 		Point2D dvec = ReversePacMan.dirs[motion];
 		int inFront = ReversePacMan.maze1.getMazeValue(row+(int)dvec.getY(), col+(int)dvec.getX());
 		if(inFront==Maze.WALL) // change direction when Pacman reaches a wall 
 		{
 			motion = getDirection(row, col);
 		}
-//		int right = ReversePacMan.maze1.getMazeValue(row, col + 1);
-//		int left = ReversePacMan.maze1.getMazeValue(row, col - 1);
-//		int up = ReversePacMan.maze1.getMazeValue(row - 1, col);
-//		int down = ReversePacMan.maze1.getMazeValue(row + 1, col);
-//		if((right != Maze.WALL) || (left != Maze.WALL) || (up != Maze.WALL) || (down != Maze.WALL))
-//		{
-//			motion = getDirection(row, col); 
-//		}
 	}
 	
 	public void render(GraphicsContext gc)
@@ -120,26 +108,32 @@ public class PacMan extends Creature
  		int row = Maze.toRow(y);
  		int topleftX = col * Maze.CELLSIZE;
  		int topleftY = row * Maze.CELLSIZE;
- 		if(ReversePacMan.PacState == 1){
- 			if(motion == 1){
+ 		if(ReversePacMan.PacState == 1) // draw image based on Pacman's direction
+		{
+ 			if(motion == 1)
+			{
  				gc.drawImage(ReversePacMan.pacMan1, topleftX, topleftY);
  				ReversePacMan.PacState = 2;
  			}
- 			if((motion == 2)||(motion == 0)){
+ 			if((motion == 2)||(motion == 0))
+			{
  				gc.drawImage(ReversePacMan.pacMan2, topleftX, topleftY);
  				ReversePacMan.PacState = 2;
  			}
- 			if(motion == 3){
+ 			if(motion == 3)
+			{
  				gc.drawImage(ReversePacMan.pacMan3, topleftX, topleftY);
  				ReversePacMan.PacState = 2;
  			}
- 			if(motion == 4){
+ 			if(motion == 4)
+			{
  				gc.drawImage(ReversePacMan.pacMan4, topleftX, topleftY);
  				ReversePacMan.PacState = 2;
  			}
  			
  		}
- 		else if(ReversePacMan.PacState == 2){
+ 		else if(ReversePacMan.PacState == 2)
+		{
  			gc.drawImage(ReversePacMan.pacMan5, topleftX, topleftY);
  			ReversePacMan.PacState = 1;
  		}

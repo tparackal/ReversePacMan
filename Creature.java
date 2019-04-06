@@ -2,7 +2,9 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Parent class of all moving actors (sprites)
- * (We are using this as a super class for our characters)
+ *
+ * (We are using this as a super class for our characters  - Patrick and Tharun)
+ *
  * @author mike slattery
  */
 public class Creature 
@@ -43,8 +45,8 @@ public class Creature
 		}
 	}
 	
-	public void render(GraphicsContext gc)
+	public void render(GraphicsContext gc) // Keep this!! Otherwise game crashes
 	{
-		//gc.drawImage(ImageManager.get(look), x-PlayField.CELLSIZE, y-PlayField.CELLSIZE);
+
 	}
 }
