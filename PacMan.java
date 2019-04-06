@@ -125,7 +125,7 @@ public class PacMan extends Creature
  				gc.drawImage(ReversePacMan.pacMan1, topleftX, topleftY);
  				ReversePacMan.PacState = 2;
  			}
- 			if(motion == 2){
+ 			if((motion == 2)||(motion == 0)){
  				gc.drawImage(ReversePacMan.pacMan2, topleftX, topleftY);
  				ReversePacMan.PacState = 2;
  			}
@@ -152,6 +152,10 @@ public class PacMan extends Creature
 		int d = motion; //  random number 1-4 inclusive
 		while(!found)
 		{
+			if(d == 0){
+				result = 1;
+				break;
+			}
 			if(d == 1) //left
 			{
 				if(Maze.maze[row][col - 1] != Maze.WALL)

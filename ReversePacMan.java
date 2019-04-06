@@ -36,6 +36,7 @@ public class ReversePacMan extends Application
 			new Point2D(-1,0), new Point2D(1,0),
 			new Point2D(0,-1), new Point2D(0,1)
 	};
+	int gamestate = 1;
 	public static Image pacMan1;
 	public static Image pacMan2;
 	public static Image pacMan3;
@@ -43,6 +44,7 @@ public class ReversePacMan extends Application
 	public static Image pacMan5;
 	public static Image ghost1Left, ghost1Right, ghost1Up, ghost1Down, 
 			ghost2Left, ghost2Right, ghost2Up, ghost2Down;
+	public static Image title;
 	public static void main(String[] args) 
 	{
 		launch(args);
@@ -77,6 +79,16 @@ public class ReversePacMan extends Application
 						case DOWN:
 							dir2=4; // S:Down
 							break;
+						case SPACE:
+							gamestate=2;
+							break;
+							
+						case U:
+							gamestate=4;
+							break;
+						case I:
+							gamestate=5;
+							break;
 						default:
 							break;
 					}
@@ -87,11 +99,42 @@ public class ReversePacMan extends Application
 	
 	public void update() 
 	{
-		for (int i = 0; i < 3; i++) // update the loop to go further each time an element is added
-		{
-			creatures[i].update();
+		switch(gamestate) {
+			case 1:
+				//creatures[2].motion = 0;
+				break;
+			case 2:
+				creatures[0].x = 12*Maze.CELLSIZE;
+				creatures[0].y = 14*Maze.CELLSIZE;
+				creatures[0].motion = 0;
+				creatures[1].x = 15*Maze.CELLSIZE;
+				creatures[1].y = 14*Maze.CELLSIZE;
+				creatures[1].motion = 0;
+				creatures[2].x = 280;
+				creatures[2].y = 460;
+				creatures[2].motion = 2;
+				gamestate = 3;
+				break;
+			case 3:	
+				for (int i = 0; i < 3; i++) // update the loop to go further each time an element is added
+				{
+					creatures[i].update();
+				}
+				collision(); // detect collision between Pacman and ghosts
+				break;
+			case 4:
+				for (int i = 0; i < 3; i++) // update the loop to go further each time an element is added
+				{
+					creatures[i].motion = 0;
+				}
+				break;
+			case 5:
+				for (int i = 0; i < 3; i++) // update the loop to go further each time an element is added
+				{
+					creatures[i].motion = 0;
+				}
+				break;
 		}
-		collision(); // detect collision between Pacman and ghosts
 	}
 //	void render(GraphicsContext gc) throws FileNotFoundException, IOException
 //	{
@@ -136,12 +179,49 @@ public class ReversePacMan extends Application
 //	 		//gc.fillRect(topleftX, topleftY, Maze.CELLSIZE, Maze.CELLSIZE);
 //	}
 	void render(GraphicsContext top_gc, GraphicsContext gc ) {
-		maze1.render(gc);
-		drawTop(top_gc);
-		for(int i = 0; i < 3; i++)
-		{
-			creatures[i].render(gc);
+		switch(gamestate){
+			case 1:
+				gc.setFill(Color.BLUE);
+				gc.fillRect(0, 0, 560, 620);
+				gc.drawImage(title, 80, 250);
+				break;
+			case 2:
+				maze1.render(gc);
+				drawTop(top_gc);
+				for(int i = 0; i < 3; i++)
+				{
+					creatures[i].render(gc);
+				}
+				break;
+			case 3:
+				maze1.render(gc);
+				drawTop(top_gc);
+				for(int i = 0; i < 3; i++)
+				{
+					creatures[i].render(gc);
+				}
+				break;
+			case 4:
+				maze1.render(gc);
+				drawTop(top_gc);
+				for(int i = 0; i < 3; i++)
+				{
+					creatures[i].render(gc);
+				}
+				drawText(gc, "GAME OVER", 250, 355);
+				break;
+			case 5:
+				maze1.render(gc);
+				drawTop(top_gc);
+				for(int i = 0; i < 3; i++)
+				{
+					creatures[i].render(gc);
+				}
+				drawText(gc, "You Win", 260, 355);
+				break;
+				
 		}
+		
 		
 //		gc.setFill(Color.AQUAMARINE); // ghost 1
 //		int col = (int) (creatures[0].x / Maze.CELLSIZE);
@@ -242,6 +322,12 @@ public class ReversePacMan extends Application
 		int scoreLoss = pellets * 40;
 		drawText(top_gc, "LEVEL SCORE: " + (levelscore-scoreLoss), 20, 15);
 		drawText(top_gc, "LIVES: " + lives, 480, 15);
+		if(pellets == 246){
+			gamestate = 4;
+		}
+		if(lives == 0){
+			gamestate = 5;
+		}
 	}
 	void drawText(GraphicsContext gc, String s, double x, double y)
 	{
@@ -260,6 +346,7 @@ public class ReversePacMan extends Application
         Group root = new Group();
         Scene theScene = new Scene( root );
         theStage.setScene( theScene );
+        title = new Image("Title.png");
         pacMan1 = new Image("PacmanLeft.png");
         pacMan2 = new Image("PacmanRight.png");
         pacMan3 = new Image("PacmanUp.png");
@@ -278,7 +365,7 @@ public class ReversePacMan extends Application
         
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GraphicsContext top_gc = canvas.getGraphicsContext2D();
-//        render(gc);
+        //render(top_gc, gc);
         setHandlers(theScene);
         KeyFrame kf = new KeyFrame(Duration.millis(1000 / FPS),
 				e -> {
